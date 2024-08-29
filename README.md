@@ -1,4 +1,4 @@
-# Space Shooter 2D
+# Space Shooter 2D ![Space-Shooter-Player](https://github.com/Fives56/Space-Shooter-2d/blob/main/assets/player/sprites/player1.png)
 
 ## Description
 **Space Shooter 2D** is a game developed in Godot where the player controls a spaceship. The objective is to dodge or eliminate the enemy ships that appear on the screen. Each time an enemy ship is eliminated, the player earns points and the game's difficulty increases as the player levels up.
