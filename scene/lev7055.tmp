@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckdrwowwa1u2r"]
+
+[ext_resource type="AudioStream" uid="uid://cu38c8xwp04r1" path="res://assets/music/exports/space-asteroids.ogg" id="1_8lp8r"]
+[ext_resource type="Script" path="res://script/level.gd" id="1_m6vi4"]
+[ext_resource type="Texture2D" uid="uid://bgsyu7g0dfvj0" path="res://assets/background/layered/bg-back.png" id="2_x4k76"]
+[ext_resource type="Texture2D" uid="uid://bu5hbof4yc88j" path="res://assets/background/layered/bg-stars.png" id="3_0aq0k"]
+[ext_resource type="Texture2D" uid="uid://dn7o80x7v45js" path="res://assets/background/layered/bg-planet.png" id="4_sbp2k"]
+
+[sub_resource type="Curve2D" id="Curve2D_bqgo4"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1142, 3, 0, 0, 0, 0, 1141, 645, 0, 0, 0, 0, 1164, 644, 0, 0, 0, 0, 1162, 4, 0, 0, 0, 0, 1141, 4)
+}
+point_count = 5
+
+[node name="Level" type="Node2D" groups=["level"]]
+script = ExtResource("1_m6vi4")
+
+[node name="Setings" type="Node" parent="."]
+
+[node name="MusicBG" type="AudioStreamPlayer" parent="Setings"]
+stream = ExtResource("1_8lp8r")
+autoplay = true
+
+[node name="Timer" type="Timer" parent="Setings"]
+
+[node name="Background" type="Node" parent="."]
+
+[node name="Back" type="Parallax2D" parent="Background"]
+scroll_offset = Vector2(-1, 1)
+repeat_size = Vector2(1143, 0)
+
+[node name="Bg-back" type="Sprite2D" parent="Background/Back"]
+texture_repeat = 2
+position = Vector2(573.375, 324.5)
+scale = Vector2(4.2307, 4.11875)
+texture = ExtResource("2_x4k76")
+
+[node name="Stars" type="Parallax2D" parent="Background"]
+repeat_size = Vector2(1143, 0)
+
+[node name="Bg-stars" type="Sprite2D" parent="Background/Stars"]
+texture_repeat = 2
+position = Vector2(580, 319.5)
+scale = Vector2(4.24265, 3.93125)
+texture = ExtResource("3_0aq0k")
+
+[node name="Planet_1" type="Parallax2D" parent="Background"]
+repeat_size = Vector2(2190, 0)
+
+[node name="Bg-planet" type="Sprite2D" parent="Background/Planet_1"]
+texture_repeat = 2
+position = Vector2(577.5, 323.5)
+scale = Vector2(4.23897, 4.01875)
+texture = ExtResource("4_sbp2k")
+
+[node name="Planet_2" type="Parallax2D" parent="Background"]
+scroll_offset = Vector2(1143, 0)
+repeat_size = Vector2(2190, 0)
+
+[node name="Bg-planet" type="Sprite2D" parent="Background/Planet_2"]
+position = Vector2(526.75, 268.25)
+scale = Vector2(3.83272, 3.37188)
+texture = ExtResource("4_sbp2k")
+flip_v = true
+
+[node name="PathSpawn" type="Path2D" parent="."]
+curve = SubResource("Curve2D_bqgo4")
+
+[node name="PathFollow" type="PathFollow2D" parent="PathSpawn"]
+position = Vector2(1142, 3)
+rotation = 1.57235
+
+[connection signal="timeout" from="Setings/Timer" to="." method="_on_timer_timeout"]

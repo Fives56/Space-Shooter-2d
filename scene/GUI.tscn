@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7jo3srnvews6"]
+
+[ext_resource type="Script" path="res://script/gui.gd" id="1_741it"]
+[ext_resource type="Theme" uid="uid://nr4lowugu3oy" path="res://assets/theme/label.tres" id="1_baonc"]
+
+[node name="Gui" type="CanvasLayer"]
+script = ExtResource("1_741it")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("1_baonc")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemList" type="ItemList" parent="Control/MarginContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Score" type="Label" parent="Control/MarginContainer/ItemList"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 640.0
+offset_right = 879.0
+offset_bottom = 112.0
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="Credits" type="Label" parent="Control/MarginContainer/ItemList"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 8.0
+offset_right = 225.0
+offset_bottom = 112.0
+text = "Vidas: 1
+"
+
+[node name="Level" type="Label" parent="Control/MarginContainer/ItemList"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 320.0
+offset_right = 537.0
+offset_bottom = 112.0
+text = "Level: 1"

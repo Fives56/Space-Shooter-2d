@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=3 uid="uid://qcl283trg664"]
+
+[ext_resource type="Theme" uid="uid://nr4lowugu3oy" path="res://assets/theme/label.tres" id="1_ykkmv"]
+[ext_resource type="Script" path="res://script/menu.gd" id="2_yumv5"]
+[ext_resource type="Texture2D" uid="uid://bgsyu7g0dfvj0" path="res://assets/background/layered/bg-back.png" id="3_1epne"]
+[ext_resource type="Texture2D" uid="uid://bu5hbof4yc88j" path="res://assets/background/layered/bg-stars.png" id="4_e8bx0"]
+[ext_resource type="Texture2D" uid="uid://dn7o80x7v45js" path="res://assets/background/layered/bg-planet.png" id="5_l8ffv"]
+
+[sub_resource type="Theme" id="Theme_6b78a"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ykkmv")
+script = ExtResource("2_yumv5")
+
+[node name="Back" type="Parallax2D" parent="."]
+repeat_size = Vector2(1140, 0)
+
+[node name="Bg-back" type="Sprite2D" parent="Back"]
+texture_repeat = 2
+position = Vector2(577.5, 320.5)
+scale = Vector2(4.19485, 4.01875)
+texture = ExtResource("3_1epne")
+
+[node name="Stars" type="Parallax2D" parent="."]
+repeat_size = Vector2(1143, 0)
+
+[node name="Bg-stars" type="Sprite2D" parent="Stars"]
+texture_repeat = 2
+position = Vector2(576, 319)
+scale = Vector2(4.18382, 3.925)
+texture = ExtResource("4_e8bx0")
+
+[node name="Bg-planet" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(4.18382, 3.975)
+texture = ExtResource("5_l8ffv")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 56.0
+offset_right = 1024.0
+offset_bottom = 576.0
+
+[node name="Title" type="ItemList" parent="MarginContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = SubResource("Theme_6b78a")
+allow_reselect = true
+allow_rmb_select = true
+allow_search = false
+max_text_lines = 3
+
+[node name="Title 1" type="Label" parent="MarginContainer/Title"]
+layout_mode = 2
+offset_left = 192.0
+offset_top = 80.0
+offset_right = 360.0
+offset_bottom = 192.0
+text = "SPACE"
+horizontal_alignment = 1
+
+[node name="Title 2" type="Label" parent="MarginContainer/Title"]
+layout_mode = 2
+offset_left = 248.0
+offset_top = 136.0
+offset_right = 712.0
+offset_bottom = 248.0
+text = "SHOOTER 2D"
+horizontal_alignment = 1
+
+[node name="Button" type="ItemList" parent="MarginContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Start" type="Button" parent="MarginContainer/Button" node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 280.0
+offset_right = 440.0
+offset_bottom = 367.0
+shortcut_context = NodePath(".")
+text = "START"
+flat = true
+alignment = 2
+autowrap_mode = 2
+icon_alignment = 1
+
+[node name="Exit" type="Button" parent="MarginContainer/Button"]
+layout_mode = 0
+offset_left = 544.0
+offset_top = 280.0
+offset_right = 636.0
+offset_bottom = 367.0
+text = "EXIT
+"
+flat = true
+
+[connection signal="pressed" from="MarginContainer/Button/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/Button/Exit" to="." method="_on_exit_pressed"]

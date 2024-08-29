@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://ckdrwowwa1u2r"]
+
+[ext_resource type="AudioStream" uid="uid://cu38c8xwp04r1" path="res://assets/music/exports/space-asteroids.ogg" id="1_8lp8r"]
+[ext_resource type="Script" path="res://script/level.gd" id="1_m6vi4"]
+[ext_resource type="PackedScene" uid="uid://xnk1lluhtfqj" path="res://scene/enemy.tscn" id="2_sey1m"]
+[ext_resource type="Texture2D" uid="uid://bgsyu7g0dfvj0" path="res://assets/background/layered/bg-back.png" id="2_x4k76"]
+[ext_resource type="Texture2D" uid="uid://bu5hbof4yc88j" path="res://assets/background/layered/bg-stars.png" id="3_0aq0k"]
+[ext_resource type="PackedScene" uid="uid://c7jo3srnvews6" path="res://scene/GUI.tscn" id="3_ebcgc"]
+[ext_resource type="Texture2D" uid="uid://dn7o80x7v45js" path="res://assets/background/layered/bg-planet.png" id="4_sbp2k"]
+[ext_resource type="PackedScene" uid="uid://bni8qsubuxvlw" path="res://scene/player.tscn" id="6_yxlwf"]
+
+[sub_resource type="Curve2D" id="Curve2D_bqgo4"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1127, 77, 0, 0, 0, 0, 1127, 643, 0, 0, 0, 0, 1145, 644, 0, 0, 0, 0, 1164, 644, 0, 0, 0, 0, 1164, 77, 0, 0, 0, 0, 1144, 77)
+}
+point_count = 6
+
+[node name="Level" type="Node2D" groups=["Level"]]
+script = ExtResource("1_m6vi4")
+enemy = ExtResource("2_sey1m")
+
+[node name="Gui" parent="." instance=ExtResource("3_ebcgc")]
+
+[node name="Settings" type="Node" parent="."]
+
+[node name="MusicBG" type="AudioStreamPlayer" parent="Settings"]
+stream = ExtResource("1_8lp8r")
+autoplay = true
+
+[node name="Timer" type="Timer" parent="Settings"]
+wait_time = 0.577
+autostart = true
+
+[node name="Background" type="Node" parent="."]
+
+[node name="Back" type="Parallax2D" parent="Background"]
+scroll_offset = Vector2(-1, 1)
+repeat_size = Vector2(1143, 0)
+
+[node name="Bg-back" type="Sprite2D" parent="Background/Back"]
+texture_repeat = 2
+position = Vector2(573.375, 324.5)
+scale = Vector2(4.2307, 4.11875)
+texture = ExtResource("2_x4k76")
+
+[node name="Stars" type="Parallax2D" parent="Background"]
+repeat_size = Vector2(1143, 0)
+
+[node name="Bg-stars" type="Sprite2D" parent="Background/Stars"]
+texture_repeat = 2
+position = Vector2(580, 319.5)
+scale = Vector2(4.24265, 3.93125)
+texture = ExtResource("3_0aq0k")
+
+[node name="Planet_1" type="Parallax2D" parent="Background"]
+repeat_size = Vector2(2190, 0)
+
+[node name="Bg-planet" type="Sprite2D" parent="Background/Planet_1"]
+texture_repeat = 2
+position = Vector2(577.5, 323.5)
+scale = Vector2(4.23897, 4.01875)
+texture = ExtResource("4_sbp2k")
+
+[node name="Planet_2" type="Parallax2D" parent="Background"]
+scroll_offset = Vector2(1143, 0)
+repeat_size = Vector2(2190, 0)
+
+[node name="Bg-planet" type="Sprite2D" parent="Background/Planet_2"]
+position = Vector2(526.75, 268.25)
+scale = Vector2(3.83272, 3.37188)
+texture = ExtResource("4_sbp2k")
+flip_v = true
+
+[node name="PathSpawn" type="Path2D" parent="."]
+top_level = true
+position = Vector2(0, 5.97531)
+scale = Vector2(1, 0.922399)
+curve = SubResource("Curve2D_bqgo4")
+
+[node name="PathFollow" type="PathFollow2D" parent="PathSpawn"]
+position = Vector2(1127, 77)
+rotation = 1.5708
+
+[node name="Player" parent="." instance=ExtResource("6_yxlwf")]
+position = Vector2(70, 317)
+
+[connection signal="timeout" from="Settings/Timer" to="." method="_on_timer_timeout"]

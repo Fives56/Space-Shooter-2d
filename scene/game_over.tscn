@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds0ic0egqasa"]
+
+[ext_resource type="Theme" uid="uid://nr4lowugu3oy" path="res://assets/theme/label.tres" id="1_namam"]
+[ext_resource type="Texture2D" uid="uid://6fbnomona2hj" path="res://assets/background/bg-preview-big.png" id="2_e23oc"]
+[ext_resource type="Script" path="res://script/game_over.gd" id="2_fftd6"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_namam")
+script = ExtResource("2_fftd6")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_e23oc")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 51.0
+offset_top = 40.0
+offset_right = -51.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemList" type="ItemList" parent="MarginContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Score" type="Label" parent="MarginContainer/ItemList"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 373.0
+offset_top = 152.0
+offset_right = 624.0
+offset_bottom = 264.0
+text = "1000
+"
+
+[node name="restart" type="Button" parent="MarginContainer/ItemList"]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 328.0
+offset_right = 399.0
+offset_bottom = 415.0
+text = "RESTART"
+flat = true
+
+[node name="Exit" type="Button" parent="MarginContainer/ItemList"]
+layout_mode = 0
+offset_left = 573.0
+offset_top = 320.0
+offset_right = 665.0
+offset_bottom = 407.0
+text = "EXIT"
+flat = true
+
+[node name="GameOver" type="Label" parent="MarginContainer/ItemList"]
+layout_mode = 0
+offset_left = 357.0
+offset_right = 639.0
+offset_bottom = 112.0
+text = "GAME OVER
+"
+
+[connection signal="pressed" from="MarginContainer/ItemList/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="MarginContainer/ItemList/Exit" to="." method="_on_exit_pressed"]

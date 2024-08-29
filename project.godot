@@ -1,0 +1,37 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Space Shooter 2D"
+run/main_scene="res://scene/menu.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://assets/player/sprites/player2.png"
+
+[autoload]
+
+GLOBAL="*res://script/global.gd"
+
+[display]
+
+window/size/resizable=false
+
+[global_group]
+
+Shoot=""
+Level=""
+Enemy=""
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/size/mode=0
+textures/size/resizable=true

@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=3 uid="uid://bni8qsubuxvlw"]
+
+[ext_resource type="Script" path="res://script/player.gd" id="1_0rhn6"]
+[ext_resource type="Texture2D" uid="uid://chve8aghwqaex" path="res://assets/player/sprites/player1.png" id="1_hao5a"]
+[ext_resource type="Texture2D" uid="uid://drm5jpboqix6g" path="res://assets/player/sprites/player2.png" id="1_wnu70"]
+[ext_resource type="Texture2D" uid="uid://c37cr2t2hqc1r" path="res://assets/flash/flash.png" id="2_5rc22"]
+[ext_resource type="PackedScene" uid="uid://b8ryfy37a3gn4" path="res://scene/shoot.tscn" id="2_54v3m"]
+[ext_resource type="Texture2D" uid="uid://bjcm3pssg70kk" path="res://assets/player/sprites/player3.png" id="3_457vi"]
+[ext_resource type="AudioStream" uid="uid://c8dxuuhdeki6w" path="res://assets/Sound FX/shot 1.wav" id="6_pyxyq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ybkl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wnu70")
+}],
+"loop": false,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hao5a")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_457vi")
+}],
+"loop": false,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_47ipy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5rc22")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"flash",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu7l2"]
+size = Vector2(90, 32)
+
+[node name="Player" type="CharacterBody2D"]
+top_level = true
+motion_mode = 1
+script = ExtResource("1_0rhn6")
+shoot = ExtResource("2_54v3m")
+
+[node name="Spaceship" type="AnimatedSprite2D" parent="."]
+position = Vector2(32, 23)
+scale = Vector2(3.46154, 3.14286)
+sprite_frames = SubResource("SpriteFrames_6ybkl")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Flash" type="AnimatedSprite2D" parent="."]
+position = Vector2(91, 26)
+scale = Vector2(2.47727, 1.81579)
+sprite_frames = SubResource("SpriteFrames_47ipy")
+animation = &"flash"
+frame = 1
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(32, 21)
+shape = SubResource("RectangleShape2D_gu7l2")
+
+[node name="Settings" type="Node2D" parent="."]
+
+[node name="ShootSpawn" type="Marker2D" parent="Settings"]
+position = Vector2(91, 26)
+
+[node name="AudioShoot" type="AudioStreamPlayer" parent="Settings"]
+stream = ExtResource("6_pyxyq")
+volume_db = -12.0
